@@ -1,4 +1,0 @@
-
-<http://www.ontology-of-units-of-measure.org/resource/om-2/Measure> a <http://www.w3.org/2002/07/owl#Class> ;
-	<http://www.w3.org/2000/01/rdf-schema#comment> "A measure combines a number to a unit of measure. For example, \"3 m\" is a measure."@en ;
-	<http://www.w3.org/2000/01/rdf-schema#label> "measure"@en .

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "active_model"
+require "rdoc/rdoc"
 
 require_relative "measures/version"
 
