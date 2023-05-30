@@ -5,7 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in ruby-measures.gemspec
 gemspec
 
-gem "rdoc"
+gem "yard"
 
 gem "rake", "~> 13.0"
 
