@@ -7,8 +7,8 @@ RSpec.describe Measures::Dimension do
   it "are equivalent if their factors are equivalent" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -20,8 +20,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     m = Measures::Dimension::Base.new(symbol: :M, system: system)
     l = Measures::Dimension::Base.new(symbol: :L, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: m, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: l, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: m, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: l, power: 1)
 
     this = described_class.new(factors: [this_factor, that_factor])
     that = described_class.new(factors: [that_factor, this_factor])
@@ -33,8 +33,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     m = Measures::Dimension::Base.new(symbol: :M, system: system)
     l = Measures::Dimension::Base.new(symbol: :L, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: m, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: l, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: m, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: l, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -45,8 +45,8 @@ RSpec.describe Measures::Dimension do
   it "adds common factors powers together when two dimensions are multiplied" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -60,8 +60,8 @@ RSpec.describe Measures::Dimension do
   it "removes factors whose new power is 0" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: base_dimension, power: -1)
+    this_factor = Measures::Dimension::Term.new(base: base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: base_dimension, power: -1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -75,8 +75,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
     that_base_dimension = Measures::Dimension::Base.new(symbol: :L, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: this_base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: that_base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: that_base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -91,8 +91,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
     that_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: this_base_dimension, power: 2)
-    that_factor = Measures::Dimension::Factor.new(base: that_base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 2)
+    that_factor = Measures::Dimension::Term.new(base: that_base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -106,8 +106,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
     that_base_dimension = Measures::Dimension::Base.new(symbol: :L, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: this_base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: that_base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: that_base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])
@@ -120,8 +120,8 @@ RSpec.describe Measures::Dimension do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
     that_base_dimension = Measures::Dimension::Base.new(symbol: :L, system: system)
-    this_factor = Measures::Dimension::Factor.new(base: this_base_dimension, power: 1)
-    that_factor = Measures::Dimension::Factor.new(base: that_base_dimension, power: 1)
+    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    that_factor = Measures::Dimension::Term.new(base: that_base_dimension, power: 1)
 
     this = described_class.new(factors: [this_factor])
     that = described_class.new(factors: [that_factor])

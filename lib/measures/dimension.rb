@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "./dimension/factor"
+require_relative "./dimension/term"
 
 module Measures
   class Dimension
@@ -22,7 +22,7 @@ module Measures
 
     def add_factor(base, power)
       base_dimension = system.base_dimension_for_symbol(base)
-      factors << Dimension::Factor.new(base: base_dimension, power: power)
+      factors << Dimension::Term.new(base: base_dimension, power: power)
     end
     alias factor add_factor
 

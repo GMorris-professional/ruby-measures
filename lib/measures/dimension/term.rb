@@ -2,7 +2,7 @@
 
 module Measures
   class Dimension
-    class Factor
+    class Term
       include ActiveModel::Validations
 
       validates :base, presence: true

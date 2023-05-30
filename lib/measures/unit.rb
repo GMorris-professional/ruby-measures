@@ -4,14 +4,14 @@ module Measures
   class Unit
     include ActiveModel::Validations
 
-    attr_reader :quantity, :symbol, :aliases, :system, :prefix, :multiplier
+    attr_reader :quantity, :symbol, :aliases, :system, :prefix, :factor
 
     validates :quantity, presence: true
     validates :symbol, presence: true
     validates :aliases, presence: true
     validates :system, presence: true
     validates :prefix, presence: true
-    validates :multiplier, numericality: { greater_than: 0 }
+    validates :factor, numericality: { greater_than: 0 }
 
     def initialize(options = {})
       @quantity = options[:quantity]
@@ -19,7 +19,7 @@ module Measures
       @aliases = options[:aliases]
       @system = options[:system]
       @prefix = options[:prefix] || Measures::Unit::Prefix.null
-      @multiplier = options[:multiplier] || 1
+      @factor = options[:factor] || 1
       validate!
     end
 
@@ -31,7 +31,7 @@ module Measures
         symbol == other.symbol &&
         aliases == other.aliases &&
         prefix == other.prefix &&
-        multiplier == other.multiplier &&
+        factor == other.factor &&
         system == other.system
     end
 
@@ -40,12 +40,12 @@ module Measures
         system == other_unit.system
     end
 
-    def scaled_by(multiplier)
+    def scaled_by(factor)
       self.class.new(quantity: quantity,
                      prefix: prefix,
                      symbol: symbol,
                      aliases: aliases,
-                     multiplier: multiplier,
+                     factor: factor,
                      system: system)
     end
 
@@ -56,14 +56,14 @@ module Measures
                      symbol: other_unit.symbol,
                      prefix: other_unit.prefix,
                      aliases: other_unit.aliases,
-                     multiplier: other_unit.multiplier,
+                     factor: other_unit.factor,
                      system: other_unit.system)
     end
 
     def conversion_factor(other_unit, **options)
       precision = options[:precision] || 3
-      numerator = multiplier * prefix.scaling_factor
-      denominator = other_unit.multiplier * other_unit.prefix_scaling_factor
+      numerator = factor * prefix.scaling_factor
+      denominator = other_unit.factor * other_unit.prefix_scaling_factor
       (numerator / denominator).round(precision)
     end
 
@@ -71,7 +71,7 @@ module Measures
       self.class.new(quantity: quantity,
                      symbol: symbol,
                      aliases: aliases,
-                     multiplier: multiplier * prefix.scaling_factor,
+                     factor: factor * prefix.scaling_factor,
                      system: system)
     end
   end

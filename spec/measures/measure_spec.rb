@@ -25,7 +25,7 @@ RSpec.describe Measures::Measure do
                               aliases: ["meter"],
                               prefix: centi,
                               system: system,
-                              multiplier: 2.54)
+                              factor: 2.54)
     two_inches = Measures::Measure.new(magnitude: 2, unit: inch)
     five_centimeters = two_inches.to(centimeter)
     expect(five_centimeters.magnitude).to eq(5.08)

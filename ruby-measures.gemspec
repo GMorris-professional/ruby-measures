@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/ruby/measures/version"
+require_relative "lib/measures/version"
 
 Gem::Specification.new do |spec|
   spec.name = "ruby-measures"

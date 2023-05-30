@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require_relative "measures/version"
 require "active_model"
+
+require_relative "measures/version"
+
 require_relative "measures/dimension"
 require_relative "measures/dimension/base"
-require_relative "measures/dimension/factor"
+require_relative "measures/dimension/term"
 
 require_relative "measures/quantity"
 

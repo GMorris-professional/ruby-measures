@@ -3,7 +3,7 @@
 require "rspec"
 require "spec_helper"
 
-RSpec.describe Measures::Dimension::Factor do
+RSpec.describe Measures::Dimension::Term do
   it "is equivalent to another if they have the same base and powe" do
     base_dimension = :M
     this = described_class.new(base: base_dimension)

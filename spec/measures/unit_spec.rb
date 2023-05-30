@@ -42,7 +42,7 @@ RSpec.describe Measures::Unit do
                                       symbol: "m",
                                       aliases: ["meter"],
                                       prefix: prefix,
-                                      multiplier: 2.54,
+                                      factor: 2.54,
                                       system: system)
     expect(this_unit.scaled_by(2.54)).to eq(scaled_unit)
   end
@@ -70,7 +70,7 @@ RSpec.describe Measures::Unit do
                                      prefix: prefix,
                                      system: system)
     meter = centimeter.remove_prefix
-    expect(meter.multiplier).to eq(0.1)
+    expect(meter.factor).to eq(0.1)
     expect(meter.prefix).to eq(Measures::Unit::Prefix.null)
   end
 end
