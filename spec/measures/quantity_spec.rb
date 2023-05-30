@@ -13,10 +13,10 @@ RSpec.describe Measures::Quantity do
 
   it "is a base quantity if its dimension is a base dimension" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
-    this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
+    term = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
-    this_dimension = Measures::Dimension.new(factors: [this_factor], system: system)
+    this_dimension = Measures::Dimension.new(terms: [term], system: system)
     that_dimension = this_dimension * this_dimension
 
     this = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)
@@ -28,10 +28,10 @@ RSpec.describe Measures::Quantity do
 
   it "commensurable with another quantity if they have the same dimensions" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
-    this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
+    term = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
-    this_dimension = Measures::Dimension.new(factors: [this_factor], system: system)
+    this_dimension = Measures::Dimension.new(terms: [term], system: system)
 
     this = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)
     that = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)
@@ -41,10 +41,10 @@ RSpec.describe Measures::Quantity do
 
   it "commensurable with another quantity if they have the same dimensions" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
-    this_base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    this_factor = Measures::Dimension::Term.new(base: this_base_dimension, power: 1)
+    base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
+    term = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
-    this_dimension = Measures::Dimension.new(factors: [this_factor], system: system)
+    this_dimension = Measures::Dimension.new(terms: [term], system: system)
     that_dimension = this_dimension * this_dimension
 
     this = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)

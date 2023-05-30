@@ -6,44 +6,44 @@ module Measures
   class Dimension
     include ActiveModel::Validations
 
-    attr_reader :factors, :system
+    attr_reader :terms, :system
 
-    validates :factors, presence: true
+    validates :terms, presence: true
     validates :system, presence: true
 
     def initialize(options = {})
       @system = options[:system]
-      @factors = options[:factors].compact || []
+      @terms = options[:terms].compact || []
     end
 
     def ==(other)
-      factors.all? { |factor| other.factors.include?(factor) }
+      terms.all? { |factor| other.terms.include?(factor) }
     end
 
     def add_factor(base, power)
       base_dimension = system.base_dimension_for_symbol(base)
-      factors << Dimension::Term.new(base: base_dimension, power: power)
+      terms << Dimension::Term.new(base: base_dimension, power: power)
     end
     alias factor add_factor
 
     def *(other)
-      all_factors = [*factors, *other.factors]
-      all_base_dimensions = all_factors.map(&:base).uniq
+      all_terms = [*terms, *other.terms]
+      all_base_dimensions = all_terms.map(&:base).uniq
 
-      factors = all_base_dimensions.map do |base_dimension|
-        all_factors.select { |factor| factor.base == base_dimension }.inject(&:*)
+      terms = all_base_dimensions.map do |base_dimension|
+        all_terms.select { |factor| factor.base == base_dimension }.inject(&:*)
       end
-      self.class.new(factors: factors.select { |factor| factor.power > 0 || factor.power < 0 })
+      self.class.new(terms: terms.select { |factor| factor.power > 0 || factor.power < 0 })
     end
 
     def /(other)
-      other = self.class.new(factors: other.factors.map(&:invert))
+      other = self.class.new(terms: other.terms.map(&:invert))
       self * other
     end
 
     def base?
-      factors.count == 1 &&
-        factors.all? { |factor| factor.power == 1 }
+      terms.count == 1 &&
+        terms.all? { |factor| factor.power == 1 }
     end
   end
 end
