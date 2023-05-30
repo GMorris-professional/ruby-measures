@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Measures
-  module SystemOfUnits
-    class Builder
+  module Builders
+    class SystemOfUnits
       def self.build(store, system_name)
         builder = new(store, system_name)
         yield(builder)

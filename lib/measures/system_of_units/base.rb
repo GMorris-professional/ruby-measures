@@ -35,7 +35,7 @@ module Measures
         kind = args[0].to_sym
         raise StandardError, "#{kind} is already defined as a quantity in #{name}" if @quantities[kind]
 
-        @quantities[kind] = Quantity.new(dimension: Dimension.new(factors: [], system: self), kind: kind, system: self)
+        @quantities[kind] = Quantity.new(dimension: Dimension.new(terms: [], system: self), kind: kind, system: self)
         @quantities[kind].instance_eval(&block) if block_given?
       end
 

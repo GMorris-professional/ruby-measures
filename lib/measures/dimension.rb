@@ -20,11 +20,10 @@ module Measures
       terms.all? { |factor| other.terms.include?(factor) }
     end
 
-    def add_factor(base, power)
+    def add_term(base, power)
       base_dimension = system.base_dimension_for_symbol(base)
       terms << Dimension::Term.new(base: base_dimension, power: power)
     end
-    alias factor add_factor
 
     def *(other)
       all_terms = [*terms, *other.terms]

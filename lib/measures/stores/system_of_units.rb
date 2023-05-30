@@ -3,8 +3,8 @@
 require_relative "base"
 
 module Measures
-  module SystemOfUnits
-    class Store
+  module Stores
+    class SystemOfUnits
       def self.systems
         @systems ||= {}
       end
