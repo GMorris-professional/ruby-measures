@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "./system_of_units/store"
-require_relative "./system_of_units/builder"
+require_relative "./builders/system_of_units_builder"
 
 module Measures
   module SystemOfUnits
@@ -20,7 +19,7 @@ module Measures
 
         Measures::SystemOfUnits.define_getter_method(system_name)
 
-        Builder.build(Store, system_name) do |system_of_units|
+        Measures::Builders::SystemOfUnitsBuilder.build(Measures::SystemOfUnits, system_name) do |system_of_units|
           system_of_units.instance_eval(&block) if block
         end
       end
@@ -28,8 +27,21 @@ module Measures
 
     def self.define_getter_method(system_name)
       define_singleton_method system_name do
-        Store.fetch(system_name)
+        fetch(system_name)
       end
+    end
+
+    def self.systems
+      @systems ||= {}
+    end
+
+    def self.register(name, system_of_units)
+      systems[name] = system_of_units
+      self
+    end
+
+    def self.fetch(name)
+      systems[name.to_sym] || Measures::SystemOfUnits::Base.new(name: name)
     end
   end
 end

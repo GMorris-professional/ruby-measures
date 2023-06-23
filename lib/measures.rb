@@ -13,17 +13,18 @@ require_relative "measures/quantity"
 
 require_relative "measures/unit"
 require_relative "measures/unit/prefix"
-require_relative "measures/unit/prefix/builder"
-require_relative "measures/unit/builder"
 
 require_relative "measures/system_of_units"
-require_relative "measures/system_of_units/store"
 require_relative "measures/system_of_units/base"
 
 require_relative "measures/international_standard/base_dimensions"
 require_relative "measures/international_standard/quantities"
 require_relative "measures/international_standard/units"
 require_relative "measures/international_standard/prefixes"
+
+require_relative "measures/builders/prefix_builder"
+require_relative "measures/builders/unit_builder"
+require_relative "measures/builders/system_of_units_builder"
 
 require_relative "measures/measure"
 

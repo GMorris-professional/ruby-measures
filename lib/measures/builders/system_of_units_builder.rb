@@ -2,7 +2,7 @@
 
 module Measures
   module Builders
-    class SystemOfUnits
+    class SystemOfUnitsBuilder
       def self.build(store, system_name)
         builder = new(store, system_name)
         yield(builder)
