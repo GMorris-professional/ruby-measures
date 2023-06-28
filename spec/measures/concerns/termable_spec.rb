@@ -3,9 +3,9 @@
 require "rspec"
 require "spec_helper"
 
-RSpec.describe Measures::Concerns::Multiplicable do
+RSpec.describe Measures::Concerns::Termable do
   class Term
-    include Measures::Concerns::Multiplicable
+    include Measures::Concerns::Termable
   end
 
   context "when included by a class" do

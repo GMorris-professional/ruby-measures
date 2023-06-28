@@ -2,7 +2,7 @@
 
 module Measures
   module Concerns
-    module Multiplicable
+    module Termable
       attr_reader :terms
 
       def initialize(options)
