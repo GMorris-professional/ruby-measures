@@ -5,6 +5,12 @@ require "rdoc/rdoc"
 
 require_relative "measures/version"
 
+require_relative "measures/errors/no_system"
+require_relative "measures/errors/no_symbol"
+
+require_relative "measures/concerns/multiplicable"
+require_relative "measures/concerns/systemic"
+
 require_relative "measures/dimension"
 require_relative "measures/dimension/base"
 require_relative "measures/dimension/term"
