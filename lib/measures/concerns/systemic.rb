@@ -5,7 +5,7 @@ require_relative "../errors/no_system"
 module Measures
   module Concerns
     module Systemic
-      def self.included(klass)
+      def self.prepended(klass)
         klass.attr_reader :system
       end
 
@@ -13,7 +13,7 @@ module Measures
         @system = options.delete(:system)
         raise Measures::Errors::NoSystem unless @system
 
-        super()
+        options.any? ? super(options) : super()
       end
     end
   end

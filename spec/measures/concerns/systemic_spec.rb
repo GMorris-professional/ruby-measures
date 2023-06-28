@@ -5,7 +5,7 @@ require "spec_helper"
 
 RSpec.describe "Measures::Concerns::Systemic" do
   class SystemicThing
-    include Measures::Concerns::Systemic
+    prepend Measures::Concerns::Systemic
   end
 
   context "when included" do

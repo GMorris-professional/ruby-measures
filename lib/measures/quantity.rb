@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
+require_relative "./concerns/systemic"
+require_relative "./errors/no_kind"
+require_relative "./errors/no_dimension"
+
 module Measures
   class Quantity
-    include ActiveModel::Validations
+    prepend Measures::Concerns::Systemic
 
-    attr_reader :dimension, :kind, :system
+    attr_reader :dimension, :kind
 
-    validates :dimension, presence: true
-    validates :kind, presence: true
-    validates :system, presence: true
-
-    def initialize(options = {})
+    def initialize(options)
       @dimension = options[:dimension]
       @kind = options[:kind]
-      @system = options[:system]
-      validate!
+      raise Measures::Errors::NoKind unless @kind
+      raise Measures::Errors::NoDimension unless @dimension
     end
 
     delegate :base?, to: :dimension

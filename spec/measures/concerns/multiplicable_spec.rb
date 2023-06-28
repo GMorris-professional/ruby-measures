@@ -5,7 +5,7 @@ require "spec_helper"
 
 RSpec.describe Measures::Concerns::Multiplicable do
   class Term
-    include Measures::Concerns::Multiplicable
+    prepend Measures::Concerns::Multiplicable
   end
 
   context "when included by a class" do

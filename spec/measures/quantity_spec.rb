@@ -5,10 +5,7 @@ require "spec_helper"
 
 RSpec.describe Measures::Quantity do
   it "requires a dimension, a kind and a system" do
-    expect do
-      described_class.new
-    end.to raise_error(ActiveModel::ValidationError,
-                       "Validation failed: Dimension can't be blank, Kind can't be blank, System can't be blank")
+    expect { Measures::Quantity.new }.to raise_error(Measures::Errors::NoKind)
   end
 
   it "is a base quantity if its dimension is a base dimension" do
