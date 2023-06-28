@@ -10,6 +10,8 @@ module Measures
     class Base
       include Measures::Concerns::Systemic
 
+      attr_reader :symbol
+
       ##
       # Creates a new Base Dimension described by a +symbol+.
       #
@@ -19,7 +21,6 @@ module Measures
         super(options)
         @symbol = options[:symbol]
       end
-      attr_reader :symbol
 
       def ==(other)
         symbol == other.symbol &&
