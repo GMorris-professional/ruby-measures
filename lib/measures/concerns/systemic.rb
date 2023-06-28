@@ -11,8 +11,9 @@ module Measures
 
       def initialize(options)
         @system = options.delete(:system)
-        raise Measures::Errors::NoSystem
-        super(options)
+        raise Measures::Errors::NoSystem unless @system
+
+        super()
       end
     end
   end

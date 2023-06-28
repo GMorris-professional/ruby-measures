@@ -7,7 +7,7 @@ module Measures
 
       def initialize(options)
         @terms = options.delete(:terms) || { self => 1 }
-        super(options)
+        super()
       end
 
       def *(other)

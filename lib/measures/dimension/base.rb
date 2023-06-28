@@ -18,8 +18,10 @@ module Measures
       # An ActiveModel::ValidationError is raised if a +symbol+ is not provided
       # An ActiveModel::ValidationError is raised if a +system+ is not provided
       def initialize(options = {})
+        @symbol = options.delete(:symbol)
+        raise Measures::Errors::NoSymbol unless @symbol
+
         super(options)
-        @symbol = options[:symbol]
       end
 
       def ==(other)
