@@ -14,6 +14,11 @@ RSpec.describe Measures::Concerns::Multiplicable do
       expect(multiplicable_term.terms).to eq({ "test": 1 })
     end
 
+    it "has inverted terms" do
+      multiplicable_term = Term.new(terms: { "test": 1 })
+      expect(multiplicable_term.inverted_terms).to eq({ "test": -1 })
+    end
+
     it "can be multiplied with another multiplicable" do
       this_multiplicable_term = Term.new(terms: { "some_term": 1 })
       that_multiplicable_term = Term.new(terms: { "some_term": 1 })
