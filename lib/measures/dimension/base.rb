@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "../concerns/systemic"
+require_relative "../errors/no_symbol"
+
 module Measures
   class Dimension
     ##
     # This class represents a base dimension that can be used to construct derived dimensions
     class Base
-      include ActiveModel::Validations
+      include Measures::Concerns::Systemic
 
-      validates :symbol, presence: true
-      validates :system, presence: true
+      attr_reader :symbol
 
       ##
       # Creates a new Base Dimension described by a +symbol+.
@@ -16,11 +18,11 @@ module Measures
       # An ActiveModel::ValidationError is raised if a +symbol+ is not provided
       # An ActiveModel::ValidationError is raised if a +system+ is not provided
       def initialize(options = {})
-        @symbol = options[:symbol]
-        @system = options[:system]
-        validate!
+        @symbol = options.delete(:symbol)
+        raise Measures::Errors::NoSymbol unless @symbol
+
+        super(options)
       end
-      attr_reader :symbol, :system
 
       def ==(other)
         symbol == other.symbol &&
