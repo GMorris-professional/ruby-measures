@@ -5,10 +5,8 @@ require "spec_helper"
 
 RSpec.describe Measures::Unit do
   it "requires a quantity, symbol, and aliases" do
-    expect do
-      described_class.new
-    end.to raise_error(ActiveModel::ValidationError,
-                       "Validation failed: Quantity can't be blank, Symbol can't be blank, Aliases can't be blank, System can't be blank")
+    expect { Measures::Unit.new({}) }.to raise_error(Measures::Errors::NoSystem)
+    expect { Measures::Unit.new({ system: :test }) }.to raise_error(Measures::Errors::NoQuantity)
   end
 
   it "is a base unit if its quantity is a base" do

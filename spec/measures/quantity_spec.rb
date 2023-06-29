@@ -5,18 +5,15 @@ require "spec_helper"
 
 RSpec.describe Measures::Quantity do
   it "requires a dimension, a kind and a system" do
-    expect do
-      described_class.new
-    end.to raise_error(ActiveModel::ValidationError,
-                       "Validation failed: Dimension can't be blank, Kind can't be blank, System can't be blank")
+    expect { Measures::Quantity.new({}) }.to raise_error(Measures::Errors::NoSystem)
+    expect { Measures::Quantity.new({ system: :test }) }.to raise_error(Measures::Errors::NoKind)
   end
 
   it "is a base quantity if its dimension is a base dimension" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    term = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
-    this_dimension = Measures::Dimension.new(terms: [term], system: system)
+    this_dimension = Measures::Dimension.new(terms: { base_dimension => 1 }, system: system)
     that_dimension = this_dimension * this_dimension
 
     this = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)
@@ -42,9 +39,8 @@ RSpec.describe Measures::Quantity do
   it "commensurable with another quantity if they have the same dimensions" do
     system = Measures::SystemOfUnits::Base.new(name: "test")
     base_dimension = Measures::Dimension::Base.new(symbol: :M, system: system)
-    term = Measures::Dimension::Term.new(base: base_dimension, power: 1)
 
-    this_dimension = Measures::Dimension.new(terms: [term], system: system)
+    this_dimension = Measures::Dimension.new(terms: { base_dimension => 1 }, system: system)
     that_dimension = this_dimension * this_dimension
 
     this = described_class.new(dimension: this_dimension, kind: :test, system: :some_system)

@@ -7,6 +7,10 @@ require_relative "measures/version"
 
 require_relative "measures/errors/no_system"
 require_relative "measures/errors/no_symbol"
+require_relative "measures/errors/no_quantity"
+require_relative "measures/errors/no_aliases"
+require_relative "measures/errors/no_kind"
+require_relative "measures/errors/no_dimension"
 
 require_relative "measures/concerns/multiplicable"
 require_relative "measures/concerns/systemic"

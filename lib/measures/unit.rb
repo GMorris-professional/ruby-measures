@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
+require_relative "./errors/no_aliases"
+require_relative "./errors/no_symbol"
+require_relative "./errors/no_quantity"
+
 module Measures
   class Unit
-    include ActiveModel::Validations
+    include Measures::Concerns::Systemic
 
-    attr_reader :quantity, :symbol, :aliases, :system, :prefix, :factor
+    attr_reader :quantity
+    attr_reader :symbol, :aliases, :prefix, :factor
 
-    validates :quantity, presence: true
-    validates :symbol, presence: true
-    validates :aliases, presence: true
-    validates :system, presence: true
-    validates :prefix, presence: true
-    validates :factor, numericality: { greater_than: 0 }
-
-    def initialize(options = {})
+    def initialize(options)
       @quantity = options[:quantity]
       @symbol = options[:symbol]
       @aliases = options[:aliases]
-      @system = options[:system]
       @prefix = options[:prefix] || Measures::Unit::Prefix.null
       @factor = options[:factor] || 1
-      validate!
+      raise Measures::Errors::NoQuantity unless @quantity
+      raise Measures::Errors::NoSymbol unless @symbol
+      raise Measures::Errors::NoAliases unless @aliases
     end
 
     delegate :base?, to: :quantity

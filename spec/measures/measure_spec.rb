@@ -6,7 +6,7 @@ require "spec_helper"
 RSpec.describe Measures::Measure do
   it "requires a magnitude and a unit" do
     expect do
-      described_class.new
+      described_class.new({})
     end.to raise_error(ActiveModel::ValidationError,
                        "Validation failed: Magnitude is not a number, Unit can't be blank")
   end
