@@ -11,7 +11,7 @@ RSpec.describe Measures::Measure do
   end
 
   it "can be converted to another unit" do
-    centi = Measures::Unit::Prefix.new(symbol: "c", full: "centi", scaling_factor: 0.01)
+    centi = Measures::Unit::Prefix.new(symbol: "c", full_description: "centi", scaling_factor: 0.01)
     system = Measures::SystemOfUnits::Base.new(name: "SI")
     this_quantity = instance_double(Measures::Quantity, commensurable_with?: true)
     centimeter = Measures::Unit.new(quantity: this_quantity,

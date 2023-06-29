@@ -21,8 +21,9 @@ module Measures
       raise Measures::Errors::NoAliases unless @aliases
     end
 
-    delegate :base?, to: :quantity
-    delegate :scaling_factor, to: :prefix, prefix: true
+    def base?
+      quantity.base?
+    end
 
     def ==(other)
       quantity == other.quantity &&
@@ -61,7 +62,7 @@ module Measures
     def conversion_factor(other_unit, **options)
       precision = options[:precision] || 3
       numerator = factor * prefix.scaling_factor
-      denominator = other_unit.factor * other_unit.prefix_scaling_factor
+      denominator = other_unit.factor * other_unit.prefix.scaling_factor
       (numerator / denominator).round(precision)
     end
 

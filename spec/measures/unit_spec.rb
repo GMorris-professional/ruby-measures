@@ -11,7 +11,7 @@ RSpec.describe Measures::Unit do
   end
 
   it "is a base unit if its quantity is a base" do
-    prefix = Measures::Unit::Prefix.new(symbol: "test", full: "test", scaling_factor: 1)
+    prefix = Measures::Unit::Prefix.new(symbol: "test", full_description: "test", scaling_factor: 1)
     quantity = instance_double(Measures::Quantity, base?: true)
     system = Measures::SystemOfUnits::Base.new(name: "test")
     unit = described_class.new(quantity: quantity, symbol: "T", aliases: ["temperature"], prefix: prefix,
@@ -20,7 +20,7 @@ RSpec.describe Measures::Unit do
   end
 
   it "is commensurable with another unit if their quantities commensurable" do
-    prefix = Measures::Unit::Prefix.new(symbol: "test", full: "test", scaling_factor: 1)
+    prefix = Measures::Unit::Prefix.new(symbol: "test", full_description: "test", scaling_factor: 1)
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_quantity = instance_double(Measures::Quantity, commensurable_with?: true)
     that_quantity = instance_double(Measures::Quantity)
@@ -32,7 +32,7 @@ RSpec.describe Measures::Unit do
   end
 
   it "can be scaled arbitrarily" do
-    prefix = Measures::Unit::Prefix.new(symbol: "cm", full: "centi", scaling_factor: 0.1)
+    prefix = Measures::Unit::Prefix.new(symbol: "cm", full_description: "centi", scaling_factor: 0.1)
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_quantity = instance_double(Measures::Quantity, commensurable_with?: true)
     this_unit = described_class.new(quantity: this_quantity, symbol: "m", aliases: ["meter"], prefix: prefix,
@@ -47,7 +47,7 @@ RSpec.describe Measures::Unit do
   end
 
   it "can provide a conversion factor for another unit" do
-    prefix = Measures::Unit::Prefix.new(symbol: "c", full: "centi", scaling_factor: 0.1)
+    prefix = Measures::Unit::Prefix.new(symbol: "c", full_description: "centi", scaling_factor: 0.1)
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_quantity = instance_double(Measures::Quantity, commensurable_with?: true)
     centimeter = described_class.new(quantity: this_quantity,
@@ -60,7 +60,7 @@ RSpec.describe Measures::Unit do
   end
 
   it "can have its prefix removed" do
-    prefix = Measures::Unit::Prefix.new(symbol: "c", full: "centi", scaling_factor: 0.1)
+    prefix = Measures::Unit::Prefix.new(symbol: "c", full_description: "centi", scaling_factor: 0.1)
     system = Measures::SystemOfUnits::Base.new(name: "test")
     this_quantity = instance_double(Measures::Quantity, commensurable_with?: true)
     centimeter = described_class.new(quantity: this_quantity,

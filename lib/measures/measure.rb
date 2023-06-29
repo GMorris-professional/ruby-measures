@@ -2,8 +2,6 @@
 
 module Measures
   class Measure
-    include ActiveModel::Validations
-
     attr_reader :numerical_value, :unit
 
     def initialize(options)

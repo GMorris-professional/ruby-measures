@@ -4,22 +4,17 @@ module Measures
   class Unit
     class Prefix
       def self.null
-        new(symbol: "", full: "", scaling_factor: 1)
+        new(symbol: "", full_description: "", scaling_factor: 1)
       end
+      include Measures::Concerns::Symbolic
 
-      include ActiveModel::Validations
-
-      validates :symbol, length: { minimum: 0, allow_nil: false }
-      validates :full, length: { minimum: 0, allow_nil: false }
-      validates :scaling_factor, numericality: true
-
-      def initialize(options = {})
-        @symbol = options[:symbol]
-        @full = options[:full]
+      def initialize(options)
+        @full_description = options[:full_description]
         @scaling_factor = options[:scaling_factor]
-        validate!
+        raise Measures::Errors::NoFullDescription unless @full_description
+        raise Measures::Errors::NoScalingFactor unless @scaling_factor
       end
-      attr_reader :symbol, :full, :scaling_factor
+      attr_reader :full_description, :scaling_factor
 
       def ==(other)
         symbol == other.symbol

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "active_model"
 require "rdoc/rdoc"
 
 require_relative "measures/version"
@@ -13,6 +12,8 @@ require_relative "measures/errors/no_kind"
 require_relative "measures/errors/no_dimension"
 require_relative "measures/errors/no_unit"
 require_relative "measures/errors/no_numerical_value"
+require_relative "measures/errors/no_full_description"
+require_relative "measures/errors/no_scaling_factor"
 require_relative "measures/errors/numerical_value_not_positive"
 
 require_relative "measures/concerns/multiplicable"
