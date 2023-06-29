@@ -3,11 +3,6 @@
 module Measures
   class Dimension
     class Term
-      include ActiveModel::Validations
-
-      validates :base, presence: true
-      validates :power, numericality: { only_integer: true }
-
       def initialize(options = {})
         @base = options[:base]
         @power = options[:power] || 1

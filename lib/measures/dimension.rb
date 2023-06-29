@@ -5,15 +5,13 @@ require_relative "./dimension/term"
 module Measures
   class Dimension
     include Measures::Concerns::Multiplicable
-    include ActiveModel::Validations
 
     def ==(other)
       terms == other.terms
     end
 
-    def add_term(base, power)
-      base_dimension = system.base_dimension_for_symbol(base)
-      terms << Dimension::Term.new(base: base_dimension, power: power)
+    def add_term(base, _power)
+      terms[base] += 1
     end
 
     def *(other)

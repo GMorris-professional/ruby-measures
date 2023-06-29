@@ -6,7 +6,9 @@ module Measures
       module MultiplicablePrependedMethods
         def initialize(options)
           @terms = options.delete(:terms) || { self => 1 }
-          method(__method__).super_method.arity.positive? ? super(options) : super()
+          return unless defined?(super)
+
+          method(__method__).super_method.arity.positive? ? super : super()
         end
       end
 

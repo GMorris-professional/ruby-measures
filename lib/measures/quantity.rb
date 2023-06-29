@@ -17,7 +17,9 @@ module Measures
       raise Measures::Errors::NoDimension unless @dimension
     end
 
-    delegate :base?, to: :dimension
+    def base?
+      dimension.base?
+    end
 
     def dimension(*_args, &block)
       @dimension.instance_eval(&block) if block_given?

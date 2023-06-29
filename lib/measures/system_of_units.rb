@@ -4,8 +4,7 @@ require_relative "./builders/system_of_units_builder"
 
 module Measures
   module SystemOfUnits
-    extend ActiveSupport::Concern
-    class_methods do
+    module SystemOfUnitsClassMethods
       def system_of_units(*args, &block)
         if args[0].is_a?(Symbol) || args[0].is_a?(String)
           # using custom name
@@ -23,6 +22,10 @@ module Measures
           system_of_units.instance_eval(&block) if block
         end
       end
+    end
+
+    def self.included(klass)
+      klass.extend SystemOfUnitsClassMethods
     end
 
     def self.define_getter_method(system_name)

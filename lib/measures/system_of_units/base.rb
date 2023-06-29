@@ -3,10 +3,6 @@
 module Measures
   module SystemOfUnits
     class Base
-      include ActiveModel::Validations
-
-      validates :name, presence: true
-
       def initialize(options = {})
         @name = options[:name]
         @prefixes = options[:prefixes] || {}

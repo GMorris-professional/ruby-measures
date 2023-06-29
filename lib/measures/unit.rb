@@ -7,23 +7,23 @@ require_relative "./errors/no_quantity"
 module Measures
   class Unit
     include Measures::Concerns::Systemic
+    include Measures::Concerns::Symbolic
 
     attr_reader :quantity
-    attr_reader :symbol, :aliases, :prefix, :factor
+    attr_reader :aliases, :prefix, :factor
 
     def initialize(options)
       @quantity = options[:quantity]
-      @symbol = options[:symbol]
       @aliases = options[:aliases]
       @prefix = options[:prefix] || Measures::Unit::Prefix.null
       @factor = options[:factor] || 1
       raise Measures::Errors::NoQuantity unless @quantity
-      raise Measures::Errors::NoSymbol unless @symbol
       raise Measures::Errors::NoAliases unless @aliases
     end
 
-    delegate :base?, to: :quantity
-    delegate :scaling_factor, to: :prefix, prefix: true
+    def base?
+      quantity.base?
+    end
 
     def ==(other)
       quantity == other.quantity &&
@@ -62,7 +62,7 @@ module Measures
     def conversion_factor(other_unit, **options)
       precision = options[:precision] || 3
       numerator = factor * prefix.scaling_factor
-      denominator = other_unit.factor * other_unit.prefix_scaling_factor
+      denominator = other_unit.factor * other_unit.prefix.scaling_factor
       (numerator / denominator).round(precision)
     end
 
