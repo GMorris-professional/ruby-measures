@@ -8,7 +8,7 @@ module Measures
     ##
     # This class represents a base dimension that can be used to construct derived dimensions
     class Base
-      prepend Measures::Concerns::Systemic
+      include Measures::Concerns::Systemic
 
       attr_reader :symbol
 

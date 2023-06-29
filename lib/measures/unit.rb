@@ -6,12 +6,12 @@ require_relative "./errors/no_quantity"
 
 module Measures
   class Unit
-    prepend Measures::Concerns::Systemic
+    include Measures::Concerns::Systemic
 
     attr_reader :quantity
     attr_reader :symbol, :aliases, :prefix, :factor
 
-    def initialize(options = {})
+    def initialize(options)
       @quantity = options[:quantity]
       @symbol = options[:symbol]
       @aliases = options[:aliases]

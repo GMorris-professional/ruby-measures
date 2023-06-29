@@ -5,7 +5,8 @@ require "spec_helper"
 
 RSpec.describe Measures::Unit do
   it "requires a quantity, symbol, and aliases" do
-    expect { Measures::Unit.new }.to raise_error(Measures::Errors::NoQuantity)
+    expect { Measures::Unit.new({}) }.to raise_error(Measures::Errors::NoSystem)
+    expect { Measures::Unit.new({ system: :test }) }.to raise_error(Measures::Errors::NoQuantity)
   end
 
   it "is a base unit if its quantity is a base" do

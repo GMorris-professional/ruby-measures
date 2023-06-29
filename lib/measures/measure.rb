@@ -9,7 +9,7 @@ module Measures
     validates :magnitude, numericality: { greater_than: 0 }
     validates :unit, presence: true
 
-    def initialize(options = {})
+    def initialize(options)
       @magnitude = options[:magnitude]
       @unit = options[:unit]
       validate!

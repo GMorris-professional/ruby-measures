@@ -6,7 +6,7 @@ require_relative "./errors/no_dimension"
 
 module Measures
   class Quantity
-    prepend Measures::Concerns::Systemic
+    include Measures::Concerns::Systemic
 
     attr_reader :dimension, :kind
 

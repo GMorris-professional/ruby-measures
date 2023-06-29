@@ -3,13 +3,16 @@
 module Measures
   module Concerns
     module Multiplicable
-      def self.prepended(klass)
-        klass.attr_reader :terms
+      module MultiplicablePrependedMethods
+        def initialize(options)
+          @terms = options.delete(:terms) || { self => 1 }
+          method(__method__).super_method.arity.positive? ? super(options) : super()
+        end
       end
 
-      def initialize(options)
-        @terms = options.delete(:terms) || { self => 1 }
-        options.any? ? super(options) : super()
+      def self.included(klass)
+        klass.attr_reader :terms
+        klass.prepend MultiplicablePrependedMethods
       end
 
       def *(other)

@@ -4,7 +4,7 @@ require_relative "./dimension/term"
 
 module Measures
   class Dimension
-    prepend Measures::Concerns::Multiplicable
+    include Measures::Concerns::Multiplicable
     include ActiveModel::Validations
 
     def ==(other)
@@ -17,11 +17,13 @@ module Measures
     end
 
     def *(other)
-      self.class.new(terms: other)
+      combined_terms = super(other)
+      self.class.new(terms: combined_terms)
     end
 
     def /(other)
-      self.class.new(terms: other)
+      combined_terms = super(other)
+      self.class.new(terms: combined_terms)
     end
 
     def base?
