@@ -11,9 +11,13 @@ require_relative "measures/errors/no_quantity"
 require_relative "measures/errors/no_aliases"
 require_relative "measures/errors/no_kind"
 require_relative "measures/errors/no_dimension"
+require_relative "measures/errors/no_unit"
+require_relative "measures/errors/no_numerical_value"
+require_relative "measures/errors/numerical_value_not_positive"
 
 require_relative "measures/concerns/multiplicable"
 require_relative "measures/concerns/systemic"
+require_relative "measures/concerns/symbolic"
 
 require_relative "measures/dimension"
 require_relative "measures/dimension/base"

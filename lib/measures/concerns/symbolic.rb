@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "../errors/no_system"
+require_relative "../errors/no_symbol"
 
 module Measures
   module Concerns
-    module Systemic
-      module SystemicPrependedMethods
+    module Symbolic
+      module SymbolicPrependedMethods
         def initialize(options)
-          @system = options.delete(:system)
-          raise Measures::Errors::NoSystem unless @system
+          @symbol = options.delete(:symbol)
+          raise Measures::Errors::NoSymbol unless @symbol
 
           return unless defined?(super)
 
@@ -17,8 +17,8 @@ module Measures
       end
 
       def self.included(klass)
-        klass.attr_reader :system
-        klass.prepend SystemicPrependedMethods
+        klass.attr_reader :symbol
+        klass.prepend SymbolicPrependedMethods
       end
     end
   end
